@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="myfirst">
-  <link name="chasis">
+  <link name="body_bot">
     <visual>
       <origin rpy="0.0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -9,10 +9,10 @@
     </visual>
   </link>
 
-  <joint name="movingbot" type="revolute">
-    <origin rpy="0 0 0" xyz="0.2 -0.05 0"/>
-    <parent link="chasis"/>
-    <child link="main_wheel"/>
+  <joint name="leftwheel_chasis" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0.323 0"/>
+    <parent link="body_bot"/>
+    <child link="leftwheel"/>
     <axis xyz="0 0 1" />
     <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
   </joint>
@@ -21,18 +21,42 @@
 
   
 
-  <link name="main_wheel">
+  <link name="leftwheel">
     <visual>
-      <origin rpy="0.0 0 0" xyz="0 0 0.05"/>
+      <origin rpy="0.0 0 0" xyz="0 0.323 0"/>
       <geometry>
         <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
       </geometry>
     </visual>
   </link>
 
-  <joint name="final_bot" type="revolute">
-    <origin rpy="0 0 0" xyz="0.2 -0.01 0"/>
-    <parent link="chasis"/>
+
+  <joint name="rightwheel_chasis" type="revolute">
+    <origin rpy="0 0 0" xyz="0 -0.323 0"/>
+    <parent link="body_bot"/>
+    <child link="rightwheel"/>
+    <axis xyz="0 0 1" />
+    <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
+  </joint>
+
+  
+
+  
+
+  <link name="rightwheel">
+    <visual>
+      <origin rpy="0.0 0 0" xyz="0 -0.323 0"/>
+      <geometry>
+        <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+
+  <joint name="castorwheel_chasis" type="revolute">
+    <origin rpy="0 0 0" xyz="0.48 0 0.02"/>
+    <parent link="body_bot"/>
     <child link="castor_wheel"/>
     <axis xyz="0 0 1" />
     <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
@@ -41,11 +65,9 @@
 
   <link name="castor_wheel">
     <visual>
-      <origin rpy="0.0 0 0" xyz="0.4 0 0.04"/>
+      <origin rpy="0.0 0 0" xyz="0.48 0 0.02" />
       <geometry>
         <mesh filename="package://pothole_detector/meshes/wheels/castors1.dae"/>
       </geometry>
     </visual>
   </link>
-
-</robot>
