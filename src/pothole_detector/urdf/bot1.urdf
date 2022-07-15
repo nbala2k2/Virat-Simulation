@@ -51,7 +51,7 @@
       </geometry>
     </visual>
   </link>
-
+</robot>
 
 
   <joint name="castorwheel_chasis" type="revolute">
