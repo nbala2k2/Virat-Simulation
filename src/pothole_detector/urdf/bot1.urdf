@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<robot name="myfirst">
-  <link name="body_bot">
+<robot name="Virat" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <link name="chasis">
     <visual>
       <origin rpy="0.0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -11,7 +13,7 @@
 
   <joint name="leftwheel_chasis" type="revolute">
     <origin rpy="0 0 0" xyz="0 0.323 0"/>
-    <parent link="body_bot"/>
+    <parent link="chasis"/>
     <child link="leftwheel"/>
     <axis xyz="0 0 1" />
     <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
@@ -33,7 +35,7 @@
 
   <joint name="rightwheel_chasis" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.323 0"/>
-    <parent link="body_bot"/>
+    <parent link="chasis"/>
     <child link="rightwheel"/>
     <axis xyz="0 0 1" />
     <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
@@ -51,12 +53,12 @@
       </geometry>
     </visual>
   </link>
-</robot>
+
 
 
   <joint name="castorwheel_chasis" type="revolute">
     <origin rpy="0 0 0" xyz="0.48 0 0.02"/>
-    <parent link="body_bot"/>
+    <parent link="chasis"/>
     <child link="castor_wheel"/>
     <axis xyz="0 0 1" />
     <limit upper="1.57" lower="-1.57" velocity="2" effort="1"/>
@@ -71,3 +73,42 @@
       </geometry>
     </visual>
   </link>
+
+  
+  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.73 0 1.18" rpy="0 0.45 0"/>
+    <parent link="chasis"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <!-- Camera -->
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0.73 0 1.18" rpy="0 0.45 0"/>
+      <geometry>
+    <box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0.73 0 1.18" rpy="0 0.45 0"/>
+      <geometry>
+    <box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0.73 0 1.18" rpy="0 0.45 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+
+
+
+</robot>
