@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+	<world name="default">
+		<include>
+			<uri>model://sun</uri>
+		</include>
+		<include>
+			<uri>model://grass_plane</uri>
+		</include>
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_1</name>
+			<pose>1 1 0  0 0 0</pose>
+
+		</include>
+
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_2</name>
+			<pose>2 4 0  0 0 0</pose>
+		</include>
+
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_3</name>
+			<pose>4 2 0  0 0 0</pose>
+		</include>
+
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_4</name>
+			<pose>6 2 0  0 0 0</pose>
+		</include>
+
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_5</name>
+			<pose>6 4 0  0 0 0</pose>
+		</include>
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_6</name>
+			<pose>2 6 0  0 0 0</pose>
+		</include>
+
+		<include>
+			<uri>model://pothole</uri>
+			<name>pothole_7</name>
+			<pose>4 6 0  0 0 0</pose>
+		</include>
+	</world>
+</sdf>
