@@ -18,11 +18,8 @@ class camera_1:
       rospy.logerr(e)
     
     image = cv_image
-
-    resized_image = cv2.resize(image, (360, 640)) 
-
     #cv2.imshow("Camera output normal", image)
-    cv2.imshow("Camera output resized", resized_image)
+    cv2.imshow("Camera output resized", image)
 
     cv2.waitKey(3)
 

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot name="Virat" xmlns:xacro="http://www.ros.org/wiki/xacro">
-<xacro:property name="damping_value" value="10" />
-<xacro:property name="friction_value" value="0.1" />
+<xacro:property name="damping_value" value="0.0" />
+<xacro:property name="friction_value" value="0.0" />
 <xacro:property name="camera_size" value="0.05"/>
 <xacro:property name="camera_origin_x" value="0.73"/>
 <xacro:property name="camera_origin_y" value="0"/>
 <xacro:property name="camera_origin_z" value="1.18"/>
-
+<xacro:include filename="$(find pothole_detector)/urdf/plugins.gazebo"/>
   <link name="chasis">
     <visual>
       <origin rpy="0.0 0 0" xyz="0 0 0"/>
@@ -14,23 +14,31 @@
         <mesh filename="package://pothole_detector/meshes/body/bot2.dae"/>
       </geometry>
     </visual>
+
+    <collision>
+    <origin rpy="0.0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="package://pothole_detector/meshes/wheels/bot2.dae"/>
+        </geometry>
+    </collision>
+
     <inertial>
-      <mass value="15.0"/>
+      <mass value="15"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
-          ixx="0" ixy="0" ixz="0"
-          iyy="0" iyz="0"
-          izz="0"
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
       />
     </inertial>
   </link>
 
-  <joint name="leftwheel_chasis" type="revolute">
+  <joint name="leftwheel_chasis" type="continuous">
     <origin rpy="0 0 0" xyz="0 0.323 0"/>
     <parent link="chasis"/>
     <child link="leftwheel"/>
-    <axis xyz="0 0 1" />
-    <limit upper="1.57" lower="-1.57" velocity="100" effort="1"/>
+    <axis xyz="0 1 0" />
+    <limit velocity="100" effort="1"/>
     <dynamics damping="${damping_value}" friction="${friction_value}"/>
   </joint>
 
@@ -40,28 +48,36 @@
 
   <link name="leftwheel">
     <visual>
-      <origin rpy="0.0 0 0" xyz="0 0.323 0"/>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
       </geometry>
     </visual>
+
+    <collision>
+    <origin rpy="0.0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
+        </geometry>
+    </collision>
+
     <inertial>
-      <origin xyz="0 0.323 0" rpy="0 1.5707 1.5707"/>
-      <mass value="5"/>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
       <inertia
-        ixx=".1" ixy="0.0" ixz="0.0"
-        iyy=".1" iyz="0.0"
-        izz=".1"/>
+        ixx="0.1" ixy="0.0" ixz="0.0"
+        iyy="0.1" iyz="0.0"
+        izz="0.1"/>
     </inertial>
   </link>
 
 
-  <joint name="rightwheel_chasis" type="revolute">
+  <joint name="rightwheel_chasis" type="continuous">
     <origin rpy="0 0 0" xyz="0 -0.323 0"/>
     <parent link="chasis"/>
     <child link="rightwheel"/>
-    <axis xyz="0 0 1" />
-    <limit upper="1.57" lower="-1.57" velocity="100" effort="1"/>
+    <axis xyz="0 1 0" />
+    <limit velocity="100" effort="1"/>
     <dynamics damping="${damping_value}" friction="${friction_value}"/>
   </joint>
 
@@ -71,47 +87,59 @@
 
   <link name="rightwheel">
     <visual>
-      <origin rpy="0.0 0 0" xyz="0 -0.323 0"/>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
       </geometry>
     </visual>
+    <collision>
+    <origin rpy="0.0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="package://pothole_detector/meshes/wheels/tyre1.dae"/>
+        </geometry>
+    </collision>
     <inertial>
-      <origin xyz="0 -0.323 0" rpy="0 1.5707 1.5707"/>
-      <mass value="5"/>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
       <inertia
-        ixx=".1" ixy="0.0" ixz="0.0"
-        iyy=".1" iyz="0.0"
-        izz=".1"/>
+        ixx="0.1" ixy="0.0" ixz="0.0"
+        iyy="0.1" iyz="0.0"
+        izz="0.1"/>
     </inertial>
   </link>
 
 
 
-  <joint name="castorwheel_chasis" type="revolute">
+  <joint name="castorwheel_chasis" type="fixed">
     <origin rpy="0 0 0" xyz="0.48 0 0.02"/>
     <parent link="chasis"/>
     <child link="castor_wheel"/>
-    <axis xyz="0 0 1" />
-    <limit upper="1.57" lower="-1.57" velocity="100" effort="1"/>
+    <axis xyz="0 1 0" />
+    <limit velocity="100" effort="1"/>
     <dynamics damping="${damping_value}" friction="${friction_value}"/>
   </joint>
 
 
   <link name="castor_wheel">
     <visual>
-      <origin rpy="0.0 0 0" xyz="0.48 0 0.02" />
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://pothole_detector/meshes/wheels/castors1.dae"/>
       </geometry>
     </visual>
+    <collision>
+    <origin rpy="0.0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="package://pothole_detector/meshes/wheels/castors1.dae"/>
+        </geometry>
+    </collision>
     <inertial>
-      <origin xyz="0.48 0 0.02" rpy="0 1.5707 1.5707"/>
-      <mass value="3"/>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <mass value="5"/>
       <inertia
-        ixx=".1" ixy="0.0" ixz="0.0"
-        iyy=".1" iyz="0.0"
-        izz=".1"/>
+        ixx="0.1" ixy="0.0" ixz="0.0"
+        iyy="0.1" iyz="0.0"
+        izz="0.1"/>
     </inertial>
   </link>
 
@@ -139,45 +167,20 @@
     <parent link="chasis"/>
     <child link="camera"/>
   </joint>
-
-  <!--Gazebo Camera Plugin-->
-   <gazebo reference="camera">
-    <sensor type="camera" name="camera">
-      <update_rate>30.0</update_rate>
-      <camera name="head">
-        <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.02</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <!-- Noise is sampled independently per pixel on each frame.
-               That pixel's noise value is added to each of its color
-               channels, which at that point lie in the range [0,1]. -->
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>/virat/camera</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
+  <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>60</updateRate>
+      <leftJoint>leftwheel_chasis</leftJoint>
+      <rightJoint>rightwheel_chasis</rightJoint>
+      <wheelSeparation>0.646</wheelSeparation>
+      <wheelDiameter>0.1</wheelDiameter>
+      <torque>0.1</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>chasis</robotBaseFrame>
+    </plugin>
   </gazebo>
+   
 </robot>
